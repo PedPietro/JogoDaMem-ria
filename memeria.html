@@ -9,16 +9,31 @@
             width: 100px;
             height: 150px;
         }
+        #tabuleiro{
+            width: 80%;
+            margin: auto;
+            background-color: white;
+        }
+        body{
+            background-color: white;
+        }
     </style>
 </head>
 <body>
-    <div>
-        <img src="Imagens - Jogo da memória/verso.jpg" id="1">
-        <img src="Imagens - Jogo da memória/verso.jpg" id="2">
-        <img src="Imagens - Jogo da memória/verso.jpg" id="3">
-        <img src="Imagens - Jogo da memória/verso.jpg" id="4">
-        <img src="Imagens - Jogo da memória/verso.jpg" id="5">
-        <img src="Imagens - Jogo da memória/verso.jpg" id="6">
+    <div id="tabuleiro">
+        <img src="imagens/verso.jpg" id="1" onclick="AlteraImagem()">
+        <img src="imagens/verso.jpg" id="2">
+        <img src="imagens/verso.jpg" id="3">
+        <img src="imagens/verso.jpg" id="4">
+        <img src="imagens/verso.jpg" id="5">
+        <img src="imagens/verso.jpg" id="6">
+        <img src="imagens/verso.jpg" id="7">
+        <img src="imagens/verso.jpg" id="8">
     </div>
+    <script>
+        function AlteraImagem(){
+            document.getElementById("1").src="imagens/1.bmp"
+        }
+    </script>
 </body>
 </html>

@@ -37,27 +37,35 @@
             transform: scale(1.1);
         }
 
-        #mensagem {
-            display: none;
-            margin-top: 20px;
-            font-size: 20px;
-            color: #333;
-        }
-
-        #mensagem button {
+        button {
             background-color: #4CAF50;
             color: white;
             border: none;
             padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
+            margin-top: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin-top: 10px;
         }
 
-        #mensagem button:hover {
+        button:hover {
             background-color: #45a049;
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .flipped {
+            transform: rotateY(180deg);
         }
     </style>
 </head>
@@ -74,10 +82,7 @@
             <img src="imagens/verso.jpg" id="7" onclick="AlteraImagem(7)">
             <img src="imagens/verso.jpg" id="8" onclick="AlteraImagem(8)">
         </div>
-        <div id="mensagem">
-            <p>Parabéns, você ganhou! Deseja jogar novamente?</p>
-            <button onclick="reiniciarJogo()">Jogar Novamente</button>
-        </div>
+        <button onclick="reiniciarJogo()">Reiniciar</button>
     </div>
 
     <script>
@@ -87,15 +92,14 @@
             "imagens/3.bmp", "imagens/3.bmp", 
             "imagens/4.bmp", "imagens/4.bmp"
         ];
-
+        
         let embaralhadas = imagens.sort(() => Math.random() - 0.5);
         let cartasViradas = [];
         let idsVirados = [];
-        let paresEncontrados = 0;
         let bloqueado = false;
 
         function AlteraImagem(id) {
-            if (bloqueado || idsVirados.includes(id)) return;
+            if (bloqueado) return;
             let carta = document.getElementById(id);
             carta.src = embaralhadas[id - 1];
             cartasViradas.push(carta);
@@ -109,15 +113,9 @@
         function verificarCartas() {
             bloqueado = true;
             if (cartasViradas[0].src === cartasViradas[1].src) {
-                paresEncontrados++;
                 cartasViradas = [];
                 idsVirados = [];
                 bloqueado = false;
-
-                // Verifica se o jogador encontrou todos os pares
-                if (paresEncontrados === embaralhadas.length / 2) {
-                    exibirMensagem();
-                }
             } else {
                 setTimeout(() => {
                     cartasViradas[0].src = "imagens/verso.jpg";
@@ -129,10 +127,6 @@
             }
         }
 
-        function exibirMensagem() {
-            document.getElementById("mensagem").style.display = "block";
-        }
-
         function reiniciarJogo() {
             let cartas = document.querySelectorAll('#tabuleiro img');
             cartas.forEach((carta, index) => {
@@ -142,9 +136,6 @@
             embaralhadas = imagens.sort(() => Math.random() - 0.5);
             cartasViradas = [];
             idsVirados = [];
-            paresEncontrados = 0;
-            bloqueado = false;
-            document.getElementById("mensagem").style.display = "none";
         }
     </script>
 </body>
